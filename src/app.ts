@@ -1,10 +1,12 @@
 import { CSVService } from "./services/CSVService";
 import { MessageCreatorService } from "./services/MessageCreatorService";
+import { MessageSenderService } from "./services/MessageSenderService";
 // import { sendMessage } from "./services/TwilioService";
 
 class App {
     private csvService: CSVService;
     private messageCreatorService: MessageCreatorService;
+    private messageSenderService: MessageSenderService = new MessageSenderService();
 
     constructor(filePath: string, urlFront: string, sender: string) {
         this.csvService = new CSVService(filePath);
@@ -16,7 +18,10 @@ class App {
 
         // This method adds the URL to the data object
         await this.messageCreatorService.createMessages(data);
-        console.log('Data:', data);
+
+        data.map(data => this.messageSenderService.sendToWhatsapp(data.telefono, data.nombre, data.url ?? ''));
+        data.map(data => this.messageSenderService.sendToMail(data.correo, data.nombre, data.url ?? ''));
+        // Mandar los mensajes por whatsapp utilizando el servicio de Twilio
     }
 }
 
