@@ -1,48 +1,31 @@
-import { Data } from "./interfaces/data";
-import { MessageResponse } from "./interfaces/messageResponse";
 import { CSVService } from "./services/CSVService";
-import { sendMessage } from "./services/TwilioService";
-import axios from 'axios';
+import { MessageCreatorService } from "./services/MessageCreatorService";
+// import { sendMessage } from "./services/TwilioService";
 
+class App {
+    private csvService: CSVService;
+    private messageCreatorService: MessageCreatorService;
 
-
-const filePath: string = 'data/data.csv';
-const csvService = new CSVService(filePath);
-const sender = 'Hiram';
-const urlFront = 'https://mensajitos-newyear-hiram.vercel.app/';
-
-const data = csvService.readData();
-console.log(data);
-
-
-async function createMessages(data: Data[]) {
-    const messages = [];
-
-    for (const item of data) {
-        const payload = {
-            reciver: item.nombre,
-            sender: sender,
-            msg: item.mensaje,
-        };
-
-        try {
-            const response = await axios.post('https://mensajitos-api-495924555478.us-central1.run.app/create', payload);
-            const responseData: MessageResponse = response.data
-            item.url = `${urlFront}/${responseData._id}`;
-            messages.push(item.url);
-        } catch (error) {
-            console.error('Error creating message:', error);
-        }
+    constructor(filePath: string, urlFront: string, sender: string) {
+        this.csvService = new CSVService(filePath);
+        this.messageCreatorService = new MessageCreatorService(urlFront, sender);
     }
 
-    return messages;
+    async run() {
+        const data = this.csvService.readData();
+
+        // This method adds the URL to the data object
+        await this.messageCreatorService.createMessages(data);
+        console.log('Data:', data);
+    }
 }
 
-createMessages(data).then((messages) => {
-    // console.log('Messages created:', messages);
-    console.log('Messages created:', messages.length);
-    console.log(data)
-});
+
+
+const app = new App('data/data.csv', 'https://mensajitos-newyear-hiram.vercel.app/', 'Hiram');
+app.run();
+
+
 
 
 
