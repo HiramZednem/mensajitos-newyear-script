@@ -21,9 +21,20 @@ class MailerService {
     const mailOptions = {
       from: SENDER_EMAIL,
       to: email,
-      subject: "FELIZ AÑO NUEVO",
-      text:
-        "Hola, te hice una pequeeña web para que la veas, espero que te guste. Aquí tienes el link: " + web,
+      subject: "🎆 ¡FELIZ AÑO NUEVO! 🎇",
+text: `
+🎉 ¡Hola, ${name}! 🎉 
+
+✨ Te hice una pequeña web personalizada con un mensaje para este inicio de año. Espero que te encante. 💻❤️  
+🌐 Aquí tienes el link para verla: ${web}  
+
+🎁 Que este año nuevo esté lleno de momentos increíbles, metas cumplidas y mucha felicidad. 🥂🍀  
+
+¡No olvides compartir tu sonrisa con el mundo! 😄🌟  
+
+Con cariño,  
+💌 Hiram :)
+`,
     };
 
     try {
