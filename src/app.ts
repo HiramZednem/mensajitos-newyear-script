@@ -1,7 +1,7 @@
 import { CSVService } from "./services/CSVService";
 import { MessageCreatorService } from "./services/MessageCreatorService";
 import { MessageSenderService } from "./services/MessageSenderService";
-// import { sendMessage } from "./services/TwilioService";
+
 
 class App {
     private csvService: CSVService;
@@ -19,7 +19,7 @@ class App {
         // This method adds the URL to the data object
         await this.messageCreatorService.createMessages(data);
 
-        // data.map(data => this.messageSenderService.sendToWhatsapp(data.telefono, data.nombre, data.url ?? ''));
+        data.map(data => this.messageSenderService.sendToWhatsapp(data.telefono, data.nombre, data.url ?? ''));
         data.map(data => this.messageSenderService.sendToMail(data.correo, data.nombre, data.url ?? ''));
     }
 }

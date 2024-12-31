@@ -5,7 +5,6 @@ class MailerService {
   private transporter: Transporter;
   constructor() {
     this.transporter = this.createTransporter();
-    console.log(SENDER_EMAIL, SENDER_PASSWORD);
   }
 
   createTransporter(): Transporter {

@@ -13,7 +13,7 @@ export const sendMessage = async (phone: string, name: string, web: string): Pro
             contentVariables: JSON.stringify({ "1": name, "2": web}),
             to: `whatsapp:+521${phone}`
         });
-        console.log(message.sid);
+        console.log(`whatsapp sent to ${phone} with name ${name}`);
     } catch (error) {
         console.error('Error sending message:', error);
     }
