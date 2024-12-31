@@ -26,7 +26,7 @@ export class MessageCreatorService {
           payload
         );
         const responseData: MessageResponse = response.data;
-        item.url = `${this.urlFront}/${responseData._id}`;
+        item.url = `${this.urlFront}${responseData._id}`;
       } catch (error) {
         console.error("Error creating message:", error);
       }
