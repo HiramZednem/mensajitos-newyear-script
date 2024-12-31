@@ -19,9 +19,8 @@ class App {
         // This method adds the URL to the data object
         await this.messageCreatorService.createMessages(data);
 
-        data.map(data => this.messageSenderService.sendToWhatsapp(data.telefono, data.nombre, data.url ?? ''));
+        // data.map(data => this.messageSenderService.sendToWhatsapp(data.telefono, data.nombre, data.url ?? ''));
         data.map(data => this.messageSenderService.sendToMail(data.correo, data.nombre, data.url ?? ''));
-        // Mandar los mensajes por whatsapp utilizando el servicio de Twilio
     }
 }
 
@@ -30,9 +29,3 @@ class App {
 const app = new App('data/data.csv', 'https://mensajitos-newyear-hiram.vercel.app/', 'Hiram');
 app.run();
 
-
-
-
-
-
-// sendMessage('9613321460', 'Penegrino', 'https://mensajitos-newyear-hiram.vercel.app/6773b1405377746b3ed33a6e')

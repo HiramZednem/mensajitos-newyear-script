@@ -20,8 +20,6 @@ export class CSVService {
         const [nombre, correo, telefono, mensaje] = row.split(",");
         dataArray.push({ nombre, correo, telefono, mensaje });
       });
-      console.log("Datos guardados en el arreglo:");
-      console.log(dataArray);
     } catch (err) {
       console.error("Error leyendo el archivo CSV:", err);
     }
