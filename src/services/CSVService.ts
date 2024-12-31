@@ -1,11 +1,6 @@
 import fs from "fs";
+import { Data } from "../interfaces/data";
 
-interface Data {
-  nombre: string;
-  correo: string;
-  telefono: string;
-  mensaje: string;
-}
 
 export class CSVService {
   private filePath: string;
@@ -31,10 +26,10 @@ export class CSVService {
       console.error("Error leyendo el archivo CSV:", err);
     }
 
-    return dataArray;
+    return this.cleanData(dataArray);
   }
 
-  public cleanData(data: Data[]): Data[] {
+  private cleanData(data: Data[]): Data[] {
     return data.map((item) => {
       const { nombre, correo, telefono, mensaje } = item;
       return {
