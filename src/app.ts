@@ -14,13 +14,13 @@ class App {
     }
 
     async run() {
-        const data = this.csvService.readData();
+        const data = await this.csvService.readData();
 
         // This method adds the URL to the data object
         await this.messageCreatorService.createMessages(data);
 
         data.map(data => this.messageSenderService.sendToWhatsapp(data.telefono, data.nombre, data.url ?? ''));
-        data.map(data => this.messageSenderService.sendToMail(data.correo, data.nombre, data.url ?? ''));
+        // data.map(data => this.messageSenderService.sendToMail(data.correo, data.nombre, data.url ?? ''));
     }
 }
 

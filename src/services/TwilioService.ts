@@ -9,8 +9,8 @@ export const sendMessage = async (phone: string, name: string, web: string): Pro
     try {
         const message = await client.messages.create({
             from: 'whatsapp:+5215665854291',
-            contentSid: 'HX52f1b1d55bf0e1ec3d1f479c17162c02',
-            contentVariables: JSON.stringify({ "1": name, "2": web}),
+            contentSid: 'HXcaed49790ebda4e00a2bba49e85de8d3',
+            contentVariables: JSON.stringify({ "1": web }),
             to: `whatsapp:+521${phone}`
         });
         console.log(`whatsapp sent to ${phone} with name ${name}`);
